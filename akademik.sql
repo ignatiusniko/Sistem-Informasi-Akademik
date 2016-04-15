@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23 Sep 2014 pada 06.11
--- Versi Server: 5.6.16
--- PHP Version: 5.5.11
+-- Generation Time: Apr 15, 2016 at 08:59 PM
+-- Server version: 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `akademik`
@@ -23,11 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_jadwal_kuliah`
+-- Table structure for table `akademik_jadwal_kuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_jadwal_kuliah` (
-  `jadwal_id` int(11) NOT NULL AUTO_INCREMENT,
+  `jadwal_id` int(11) NOT NULL,
   `tahun_akademik_id` int(11) NOT NULL,
   `konsentrasi_id` int(11) NOT NULL,
   `makul_id` int(11) NOT NULL,
@@ -37,12 +37,11 @@ CREATE TABLE IF NOT EXISTS `akademik_jadwal_kuliah` (
   `dosen_id` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
   `jam_mulai` varchar(9) NOT NULL,
-  `jam_selesai` varchar(9) NOT NULL,
-  PRIMARY KEY (`jadwal_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=109 ;
+  `jam_selesai` varchar(9) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_jadwal_kuliah`
+-- Dumping data for table `akademik_jadwal_kuliah`
 --
 
 INSERT INTO `akademik_jadwal_kuliah` (`jadwal_id`, `tahun_akademik_id`, `konsentrasi_id`, `makul_id`, `hari_id`, `waktu_id`, `ruangan_id`, `dosen_id`, `semester`, `jam_mulai`, `jam_selesai`) VALUES
@@ -81,27 +80,28 @@ INSERT INTO `akademik_jadwal_kuliah` (`jadwal_id`, `tahun_akademik_id`, `konsent
 (105, 1, 3, 33, 0, 0, 0, 0, 6, '', ''),
 (106, 1, 3, 34, 0, 0, 0, 0, 6, '', ''),
 (107, 1, 3, 35, 0, 0, 0, 0, 6, '', ''),
-(108, 1, 3, 36, 0, 0, 0, 0, 6, '', '');
+(108, 1, 3, 36, 0, 0, 0, 0, 6, '', ''),
+(109, 6, 1, 50, 0, 0, 0, 0, 1, '', ''),
+(110, 6, 1, 50, 0, 0, 0, 0, 1, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_khs`
+-- Table structure for table `akademik_khs`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_khs` (
-  `khs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `khs_id` int(11) NOT NULL,
   `krs_id` int(11) NOT NULL,
   `mutu` int(11) NOT NULL,
   `kehadiran` int(11) NOT NULL,
   `tugas` int(11) NOT NULL,
   `grade` varchar(1) NOT NULL,
-  `confirm` int(11) NOT NULL COMMENT '1=ya 2=tidak',
-  PRIMARY KEY (`khs_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=162 ;
+  `confirm` int(11) NOT NULL COMMENT '1=ya 2=tidak'
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_khs`
+-- Dumping data for table `akademik_khs`
 --
 
 INSERT INTO `akademik_khs` (`khs_id`, `krs_id`, `mutu`, `kehadiran`, `tugas`, `grade`, `confirm`) VALUES
@@ -266,60 +266,48 @@ INSERT INTO `akademik_khs` (`khs_id`, `krs_id`, `mutu`, `kehadiran`, `tugas`, `g
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_konsentrasi`
+-- Table structure for table `akademik_konsentrasi`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_konsentrasi` (
-  `konsentrasi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `konsentrasi_id` int(11) NOT NULL,
   `nama_konsentrasi` varchar(100) NOT NULL,
   `ketua` varchar(50) NOT NULL,
   `jenjang` varchar(3) NOT NULL COMMENT '1=D1,2=D2,3=D3,4=D4',
   `jml_semester` int(11) NOT NULL,
   `kode_nomor` varchar(20) NOT NULL,
   `gelar` varchar(40) NOT NULL,
-  `prodi_id` int(11) NOT NULL,
-  PRIMARY KEY (`konsentrasi_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `prodi_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_konsentrasi`
+-- Dumping data for table `akademik_konsentrasi`
 --
 
 INSERT INTO `akademik_konsentrasi` (`konsentrasi_id`, `nama_konsentrasi`, `ketua`, `jenjang`, `jml_semester`, `kode_nomor`, `gelar`, `prodi_id`) VALUES
-(1, 'teknik inormatika', 'sample text', 'd4', 8, '23323232', 'd4', 6),
-(2, 'multimedia', 'hasan sadikin', 'd4', 5, 'dsdsd', 'sst', 1),
-(3, 'teknik mesin produksi', 'sample text', 'd3', 6, '', 'D4', 2),
-(4, 'rekamedik dan infokes', 'sample text', 'd4', 8, '', 'sst', 6),
-(5, 'teknik sipil', '', 'd3', 6, '', '', 3),
-(6, 'teknik kontruksi bangunan', '', 'd4', 8, '', '', 7),
-(7, 'teknik komputer', '', 'd3', 6, '', '', 15),
-(8, 'mekatronika', '', 'd4', 8, '', '', 8),
-(9, 'mekanik industri & desain', '', 'd4', 8, '', '', 8),
-(10, 'alamat berat', '', 'd3', 6, '', '', 4),
-(11, 'teknik otomotif', '', 'd3', 6, '', '', 9),
-(12, 'teknik otomasi', '', 'd4', 8, '', '', 14),
-(13, 'teknik otomasi industri', '', 'd4', 8, '', '', 13),
-(14, 'analisis kesehatan', '', 'd3', 6, '', '', 12),
-(15, 'perpajakan', '', 'd3', 6, '', '', 5),
-(16, 'komputerisasi akutansi', '', 'd4', 8, '', '', 10),
-(17, 'rekamedik dan infokes', '', 'd3', 6, '', '', 11);
+(1, 'Belum Penjurusan', '0', '0', 0, '0', '0', 1),
+(2, 'IPA', '', '', 2, '', '', 2),
+(3, 'IPS', '', '', 2, '', '', 2),
+(4, 'IPA', '', '', 2, '', '', 3),
+(5, 'IPS', '', '', 2, '', '', 3),
+(18, 'IPA', '0', '0', 0, '0', '0', 16),
+(19, 'IPS', '0', '0', 0, '0', '0', 16);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_krs`
+-- Table structure for table `akademik_krs`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_krs` (
-  `krs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `krs_id` int(11) NOT NULL,
   `nim` varchar(10) NOT NULL,
   `jadwal_id` int(11) NOT NULL,
-  `semester` int(11) NOT NULL COMMENT 'semester mahasiswa waktu pengambilan krs',
-  PRIMARY KEY (`krs_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=162 ;
+  `semester` int(11) NOT NULL COMMENT 'semester mahasiswa waktu pengambilan krs'
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_krs`
+-- Dumping data for table `akademik_krs`
 --
 
 INSERT INTO `akademik_krs` (`krs_id`, `nim`, `jadwal_id`, `semester`) VALUES
@@ -478,55 +466,42 @@ INSERT INTO `akademik_krs` (`krs_id`, `nim`, `jadwal_id`, `semester`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_prodi`
+-- Table structure for table `akademik_prodi`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_prodi` (
-  `prodi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prodi_id` int(11) NOT NULL,
   `nama_prodi` varchar(100) NOT NULL,
   `ketua` varchar(70) NOT NULL,
   `no_izin` varchar(40) NOT NULL,
-  `status` int(11) NOT NULL COMMENT '1=aktif ,2=g aktif',
-  PRIMARY KEY (`prodi_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `status` int(11) NOT NULL COMMENT '1=aktif ,2=g aktif'
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_prodi`
+-- Dumping data for table `akademik_prodi`
 --
 
 INSERT INTO `akademik_prodi` (`prodi_id`, `nama_prodi`, `ketua`, `no_izin`, `status`) VALUES
-(2, 'teknik mesin', 'sample text', '1169/D/T/2008', 2),
-(3, 'teknik sipil', '', '', 2),
-(4, 'teknik otomotif', '', '', 2),
-(5, 'akutansi', '', '', 2),
-(6, 'teknik informatika', '', '', 2),
-(7, 'teknik kontruksi bangunan', '', '', 2),
-(8, 'mekanik industri dan desain', '', '', 2),
-(9, 'mesin otomotif', '', '', 2),
-(10, 'komputerisasi akutansi', '', '', 2),
-(11, 'rekamedis dan infokes', '', '', 2),
-(12, 'teknik kimia', '', '', 2),
-(13, 'teknik otomasi', '', '', 2),
-(14, 'teknik elektro', '', '', 2),
-(15, 'teknik komputer', '', '', 2);
+(1, 'Tingkat 1', '0', '0', 1),
+(2, 'Tingkat 2', '', '', 1),
+(16, 'Tingkat 3', '0', '0', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_registrasi`
+-- Table structure for table `akademik_registrasi`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_registrasi` (
-  `registrasi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `registrasi_id` int(11) NOT NULL,
   `nim` varchar(10) NOT NULL,
   `tanggal_registrasi` datetime NOT NULL,
   `tahun_akademik_id` int(11) NOT NULL,
-  `semester` int(11) NOT NULL,
-  PRIMARY KEY (`registrasi_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `semester` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_registrasi`
+-- Dumping data for table `akademik_registrasi`
 --
 
 INSERT INTO `akademik_registrasi` (`registrasi_id`, `nim`, `tanggal_registrasi`, `tahun_akademik_id`, `semester`) VALUES
@@ -542,20 +517,19 @@ INSERT INTO `akademik_registrasi` (`registrasi_id`, `nim`, `tanggal_registrasi`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_tahun_akademik`
+-- Table structure for table `akademik_tahun_akademik`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_tahun_akademik` (
-  `tahun_akademik_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tahun_akademik_id` int(11) NOT NULL,
   `keterangan` varchar(15) NOT NULL,
   `batas_registrasi` date NOT NULL,
   `status` enum('n','y') NOT NULL,
-  `tahun` int(11) NOT NULL,
-  PRIMARY KEY (`tahun_akademik_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `tahun` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `akademik_tahun_akademik`
+-- Dumping data for table `akademik_tahun_akademik`
 --
 
 INSERT INTO `akademik_tahun_akademik` (`tahun_akademik_id`, `keterangan`, `batas_registrasi`, `status`, `tahun`) VALUES
@@ -565,29 +539,27 @@ INSERT INTO `akademik_tahun_akademik` (`tahun_akademik_id`, `keterangan`, `batas
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik_waktu_kuliah`
+-- Table structure for table `akademik_waktu_kuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `akademik_waktu_kuliah` (
-  `waktu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `keterangan` varchar(20) NOT NULL,
-  PRIMARY KEY (`waktu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `waktu_id` int(11) NOT NULL,
+  `keterangan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_agama`
+-- Table structure for table `app_agama`
 --
 
 CREATE TABLE IF NOT EXISTS `app_agama` (
   `agama_id` int(11) NOT NULL,
-  `keterangan` varchar(15) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`agama_id`)
+  `keterangan` varchar(15) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data untuk tabel `app_agama`
+-- Dumping data for table `app_agama`
 --
 
 INSERT INTO `app_agama` (`agama_id`, `keterangan`) VALUES
@@ -601,11 +573,11 @@ INSERT INTO `app_agama` (`agama_id`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_dosen`
+-- Table structure for table `app_dosen`
 --
 
 CREATE TABLE IF NOT EXISTS `app_dosen` (
-  `dosen_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dosen_id` int(11) NOT NULL,
   `nama_lengkap` varchar(70) NOT NULL,
   `nidn` varchar(20) NOT NULL,
   `nip` varchar(22) NOT NULL,
@@ -619,53 +591,31 @@ CREATE TABLE IF NOT EXISTS `app_dosen` (
   `alamat` text NOT NULL,
   `hp` varchar(12) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `prodi_id` int(11) NOT NULL,
-  PRIMARY KEY (`dosen_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+  `prodi_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_dosen`
+-- Dumping data for table `app_dosen`
 --
 
 INSERT INTO `app_dosen` (`dosen_id`, `nama_lengkap`, `nidn`, `nip`, `no_ktp`, `tempat_lahir`, `tanggal_lahir`, `gender`, `agama_id`, `status_kawin`, `gelar_pendidikan`, `alamat`, `hp`, `email`, `prodi_id`) VALUES
-(0, 'not set', '', '', '', '', '0000-00-00', '', 0, 0, '', '', '', '', 6),
-(1, 'nuris akbar sst', '748343', '196105041987032002', '43434', 'langsa', '2014-03-06', '1', 1, 1, 'sst', 'dsdsd', '081212123454', 'nu@gmail.com', 6),
-(6, 'Dr. Ciek Juliati Hisyam, MM.,M.Si', '', '196204121987032001', '', '', '0000-00-00', '1', 1, 1, '', '', '089690987654', 'saidatunnafsiah@gmail.com', 6),
-(7, 'Dr. Etin Solihatin, M.Pd.', '', '196601011989032003', '', '', '0000-00-00', '1', 1, 1, '', '', '089690987654', 'sampleemail@gmail.com', 6),
-(8, 'Alex Iskandar, Drs.,M.Pd.', '0423085601', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(11, 'Indra Hermawan, SE.', '0403077902', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(17, 'Anton Gultom, SST.,M.Pd.', '0420075701', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(18, 'Berayan Munthe, MT.', '0426055402', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(19, 'Rahmat Kuswandy, Drs.', '0412034601', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(20, 'Chrestian Maxi Adri Mamesah', '0424035101', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(21, 'Ahadiat, SST.,M.Pd.', '0423065703', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(22, 'Rahmat Gunawan, SST.,M.Pd.', '0416056602', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(23, 'Hernawati, M.Si.', '0403027206', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(24, 'Darsono, M.T.', '0413016101', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(25, 'Sutandi, M.Pd.', '0402037305', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(26, 'Sueb, Drs.,M.Si.,M.Pd.', '0025035803', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(27, 'Theresia Florens Meliala, SST.,M.Pd.', '0419108101', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(28, 'Dini Arianti, ST.', '0401097702', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(29, 'Dadan Saeful Ramdhan, SST', '', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(30, 'Ganar Afin Nendriyawan, SST', '', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(31, 'Dian Rosdiana, SST', '', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(32, 'Riri Damayanti Apnena, SST', '', '', '', '', '0000-00-00', '1', 0, 0, '', '', '', '', 6),
-(33, 'sample dosen', '2323', '444444', '', 'langsa', '2014-08-23', '1', 1, 1, '', 'sample alamat', '085654987654', 'nuris.akbar@gmail.com', 0);
+(37, 'aaa', 'aa', 'aa', '', 'aa', '0000-00-00', '1', 1, 1, '', 'aaaa', '4234', 'e@d.com', 0),
+(38, 'aaaa', 'aaa', 'aaaa', '', '', '0000-00-00', '1', 1, 1, '', 'a', '', '', 0),
+(39, 'Coba', '', '', '', '', '0000-00-00', '1', 1, 1, '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_gedung`
+-- Table structure for table `app_gedung`
 --
 
 CREATE TABLE IF NOT EXISTS `app_gedung` (
-  `gedung_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_gedung` varchar(50) NOT NULL,
-  PRIMARY KEY (`gedung_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `gedung_id` int(11) NOT NULL,
+  `nama_gedung` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_gedung`
+-- Dumping data for table `app_gedung`
 --
 
 INSERT INTO `app_gedung` (`gedung_id`, `nama_gedung`) VALUES
@@ -676,17 +626,16 @@ INSERT INTO `app_gedung` (`gedung_id`, `nama_gedung`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_hari`
+-- Table structure for table `app_hari`
 --
 
 CREATE TABLE IF NOT EXISTS `app_hari` (
-  `hari_id` int(11) NOT NULL AUTO_INCREMENT,
-  `hari` varchar(15) NOT NULL,
-  PRIMARY KEY (`hari_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `hari_id` int(11) NOT NULL,
+  `hari` varchar(15) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_hari`
+-- Dumping data for table `app_hari`
 --
 
 INSERT INTO `app_hari` (`hari_id`, `hari`) VALUES
@@ -702,20 +651,19 @@ INSERT INTO `app_hari` (`hari_id`, `hari`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_nilai_grade`
+-- Table structure for table `app_nilai_grade`
 --
 
 CREATE TABLE IF NOT EXISTS `app_nilai_grade` (
-  `nilai_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nilai_id` int(11) NOT NULL,
   `dari` float NOT NULL,
   `sampai` float NOT NULL,
   `grade` varchar(1) NOT NULL,
-  `keterangan` text NOT NULL,
-  PRIMARY KEY (`nilai_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_nilai_grade`
+-- Dumping data for table `app_nilai_grade`
 --
 
 INSERT INTO `app_nilai_grade` (`nilai_id`, `dari`, `sampai`, `grade`, `keterangan`) VALUES
@@ -729,17 +677,16 @@ INSERT INTO `app_nilai_grade` (`nilai_id`, `dari`, `sampai`, `grade`, `keteranga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_pekerjaan`
+-- Table structure for table `app_pekerjaan`
 --
 
 CREATE TABLE IF NOT EXISTS `app_pekerjaan` (
   `pekerjaan_id` varchar(2) NOT NULL,
-  `keterangan` varchar(30) NOT NULL,
-  PRIMARY KEY (`pekerjaan_id`)
+  `keterangan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_pekerjaan`
+-- Dumping data for table `app_pekerjaan`
 --
 
 INSERT INTO `app_pekerjaan` (`pekerjaan_id`, `keterangan`) VALUES
@@ -760,27 +707,25 @@ INSERT INTO `app_pekerjaan` (`pekerjaan_id`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_ruangan`
+-- Table structure for table `app_ruangan`
 --
 
 CREATE TABLE IF NOT EXISTS `app_ruangan` (
-  `ruangan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ruangan_id` int(11) NOT NULL,
   `nama_ruangan` varchar(20) NOT NULL,
   `gedung_id` int(11) NOT NULL,
   `kapasitas` int(11) NOT NULL,
-  `keterangan` varchar(100) NOT NULL,
-  PRIMARY KEY (`ruangan_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+  `keterangan` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_ruangan`
+-- Dumping data for table `app_ruangan`
 --
 
 INSERT INTO `app_ruangan` (`ruangan_id`, `nama_ruangan`, `gedung_id`, `kapasitas`, `keterangan`) VALUES
 (0, 'not set', 0, 0, ''),
 (1, 'L1.R06', 2, 25, ''),
 (2, 'L1.R05', 2, 25, ''),
-(3, 'L1.R02', 2, 60, ''),
 (4, 'L1.R07', 2, 25, ''),
 (5, 'L1.R08', 2, 50, ''),
 (6, 'L1.R09', 2, 25, ''),
@@ -794,7 +739,6 @@ INSERT INTO `app_ruangan` (`ruangan_id`, `nama_ruangan`, `gedung_id`, `kapasitas
 (14, 'L2.R09', 2, 20, ''),
 (15, 'L2.R10', 2, 20, ''),
 (16, 'L3.R03', 2, 60, ''),
-(17, 'L1.R01', 2, 0, 'lab elektro'),
 (18, 'L1.R03-4', 2, 0, 'lab elektro'),
 (19, 'L1.R10', 2, 0, 'lab elektro'),
 (20, 'L2.R02', 2, 0, 'lab bahasa'),
@@ -809,47 +753,38 @@ INSERT INTO `app_ruangan` (`ruangan_id`, `nama_ruangan`, `gedung_id`, `kapasitas
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `app_users`
+-- Table structure for table `app_users`
 --
 
 CREATE TABLE IF NOT EXISTS `app_users` (
-  `id_users` int(11) NOT NULL AUTO_INCREMENT,
+  `id_users` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `password` varchar(32) NOT NULL,
   `level` int(1) NOT NULL COMMENT '1=admin ,2=pihak jurusan ,3=pegawai ,4=mahasiswa',
   `keterangan` varchar(5) NOT NULL,
-  `last_login` datetime NOT NULL,
-  PRIMARY KEY (`id_users`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `last_login` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `app_users`
+-- Dumping data for table `app_users`
 --
 
 INSERT INTO `app_users` (`id_users`, `username`, `nama`, `password`, `level`, `keterangan`, `last_login`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, '', '2014-09-22 15:45:22'),
-(4, 'informatika', '', '270007185d0f4b290ded51f9345a7f29', 2, '6', '2014-09-06 10:57:51'),
-(6, 'nuris', 'nuris akbar', '74d7273be4b0ddeac49bfa169b288c5b', 3, '1', '2014-09-06 11:12:14'),
-(7, 'mesin', '', '9c6bd054e8eebbc99bb4d655caad4b3c', 2, '2', '2014-09-08 16:31:32'),
-(8, 'admin', '', '21232f297a57a5a743894a0e4a801fc3', 3, '33', '2014-09-22 15:45:22'),
-(9, 'mesin', '', '9c6bd054e8eebbc99bb4d655caad4b3c', 2, '2', '2014-09-08 16:31:32');
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, '', '2016-04-16 01:57:50'),
+(4, 'kepalasekolah', '', 'ad9e9366bd65e665fa808da635512230', 2, '6', '2016-04-12 14:26:05'),
+(6, 'siswa', '', 'bcd724d15cde8c47650fda962968f102', 3, '1', '2016-04-12 13:27:32'),
+(7, 'guru', '', '77e69c137812518e359196bb2f5e9bb9', 4, '2', '2016-04-14 02:31:32'),
+(11, 'kepegawaian', '', 'd45de20a488481327b5c7f2600b861cf', 5, '2', '2016-04-12 13:54:09'),
+(12, 'a', '', '0cc175b9c0f1b6a831c399e269772661', 3, '34', '2016-04-14 05:21:13'),
+(15, 'aaa', '', '47bce5c74f589f4867dbd57e9ca9f808', 3, '37', '0000-00-00 00:00:00'),
+(16, '123', '', '202cb962ac59075b964b07152d234b70', 3, '38', '0000-00-00 00:00:00'),
+(17, 'guru1', '', '92afb435ceb16630e9827f54330c59c9', 4, '39', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `daemons`
---
-
-CREATE TABLE IF NOT EXISTS `daemons` (
-  `Start` text NOT NULL,
-  `Info` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `gammu`
+-- Table structure for table `gammu`
 --
 
 CREATE TABLE IF NOT EXISTS `gammu` (
@@ -857,7 +792,7 @@ CREATE TABLE IF NOT EXISTS `gammu` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `gammu`
+-- Dumping data for table `gammu`
 --
 
 INSERT INTO `gammu` (`Version`) VALUES
@@ -868,7 +803,7 @@ INSERT INTO `gammu` (`Version`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `inbox`
+-- Table structure for table `inbox`
 --
 
 CREATE TABLE IF NOT EXISTS `inbox` (
@@ -881,29 +816,27 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   `SMSCNumber` varchar(20) NOT NULL DEFAULT '',
   `Class` int(11) NOT NULL DEFAULT '-1',
   `TextDecoded` text NOT NULL,
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ID` int(10) unsigned NOT NULL,
   `RecipientID` text NOT NULL,
-  `Processed` enum('false','true') NOT NULL DEFAULT 'false',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Processed` enum('false','true') NOT NULL DEFAULT 'false'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keuangan_biaya_kuliah`
+-- Table structure for table `keuangan_biaya_kuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `keuangan_biaya_kuliah` (
-  `biaya_kuliah_id` int(11) NOT NULL AUTO_INCREMENT,
+  `biaya_kuliah_id` int(11) NOT NULL,
   `jenis_bayar_id` int(3) NOT NULL,
   `konsentrasi_id` int(3) NOT NULL,
   `angkatan_id` int(3) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  PRIMARY KEY (`biaya_kuliah_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=943 ;
+  `jumlah` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=943 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `keuangan_biaya_kuliah`
+-- Dumping data for table `keuangan_biaya_kuliah`
 --
 
 INSERT INTO `keuangan_biaya_kuliah` (`biaya_kuliah_id`, `jenis_bayar_id`, `konsentrasi_id`, `angkatan_id`, `jumlah`) VALUES
@@ -1627,17 +1560,16 @@ INSERT INTO `keuangan_biaya_kuliah` (`biaya_kuliah_id`, `jenis_bayar_id`, `konse
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keuangan_jenis_bayar`
+-- Table structure for table `keuangan_jenis_bayar`
 --
 
 CREATE TABLE IF NOT EXISTS `keuangan_jenis_bayar` (
-  `jenis_bayar_id` int(11) NOT NULL AUTO_INCREMENT,
-  `keterangan` varchar(50) NOT NULL,
-  PRIMARY KEY (`jenis_bayar_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+  `jenis_bayar_id` int(11) NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `keuangan_jenis_bayar`
+-- Dumping data for table `keuangan_jenis_bayar`
 --
 
 INSERT INTO `keuangan_jenis_bayar` (`jenis_bayar_id`, `keterangan`) VALUES
@@ -1653,36 +1585,34 @@ INSERT INTO `keuangan_jenis_bayar` (`jenis_bayar_id`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keuangan_pembayaran`
+-- Table structure for table `keuangan_pembayaran`
 --
 
 CREATE TABLE IF NOT EXISTS `keuangan_pembayaran` (
-  `pembayaran_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pembayaran_id` int(11) NOT NULL,
   `mahasiswa_id` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
-  `no_bayar` varchar(10) NOT NULL,
-  PRIMARY KEY (`pembayaran_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `no_bayar` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keuangan_pembayaran_detail`
+-- Table structure for table `keuangan_pembayaran_detail`
 --
 
 CREATE TABLE IF NOT EXISTS `keuangan_pembayaran_detail` (
-  `pembayara_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pembayara_detail_id` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
   `nim` varchar(11) NOT NULL,
   `jenis_bayar_id` int(11) NOT NULL,
   `id_users` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `semester` int(11) NOT NULL,
-  PRIMARY KEY (`pembayara_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+  `semester` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `keuangan_pembayaran_detail`
+-- Dumping data for table `keuangan_pembayaran_detail`
 --
 
 INSERT INTO `keuangan_pembayaran_detail` (`pembayara_detail_id`, `tanggal`, `nim`, `jenis_bayar_id`, `id_users`, `jumlah`, `semester`) VALUES
@@ -1697,7 +1627,7 @@ INSERT INTO `keuangan_pembayaran_detail` (`pembayara_detail_id`, `tanggal`, `nim
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keuangan_transaksi`
+-- Table structure for table `keuangan_transaksi`
 --
 
 CREATE TABLE IF NOT EXISTS `keuangan_transaksi` (
@@ -1715,72 +1645,73 @@ CREATE TABLE IF NOT EXISTS `keuangan_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mainmenu`
+-- Table structure for table `mainmenu`
 --
 
 CREATE TABLE IF NOT EXISTS `mainmenu` (
-  `id_mainmenu` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mainmenu` int(11) NOT NULL,
   `nama_mainmenu` varchar(100) NOT NULL,
   `icon` varchar(30) NOT NULL,
   `aktif` enum('y','t') NOT NULL,
   `link` varchar(50) NOT NULL,
-  `level` int(11) NOT NULL COMMENT '1= admin,2=jurusan,3 dosen',
-  PRIMARY KEY (`id_mainmenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+  `level` int(11) NOT NULL COMMENT '1= admin,2=jurusan,3 dosen'
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mainmenu`
+-- Dumping data for table `mainmenu`
 --
 
 INSERT INTO `mainmenu` (`id_mainmenu`, `nama_mainmenu`, `icon`, `aktif`, `link`, `level`) VALUES
-(26, 'master data', 'fa fa-bar-chart-o', 'y', '#', 1),
-(27, 'mahassiwa', 'gi gi-group', 'y', 'mahasiswa', 1),
-(28, 'akademik', 'fa fa-building-o', 'y', '#', 1),
-(29, 'keuangan', 'gi gi-money', 'y', '#', 1),
-(30, 'pengguna sistem', 'gi gi-qrcode', 'y', 'users', 1),
-(31, 'Mahasiswa', 'gi gi-group', 'y', 'mahasiswa', 2),
-(32, 'dosen', 'gi gi-user', 'y', 'dosen', 2),
-(33, 'matakuliah', 'gi gi-address_book', 'y', 'matakuliah', 2),
-(34, 'registrasi', 'hi hi-qrcode', 'y', 'registrasi', 2),
-(35, 'krs & khs', 'gi gi-display', 'y', '#', 2),
-(36, 'jadwal kuliah', 'gi gi-calendar', 'y', 'jadwalkuliah', 2),
-(37, 'jadwal', 'gi gi-calendar', 'y', 'jadwalkuliah/jadwalngajar', 3),
-(38, 'absen mahasiswa', 'gi gi-notes_2', 'y', 'absensi', 3),
-(39, 'nilai', 'gi gi-stats', 'y', 'khs/berinilai', 3),
-(40, 'bodata', 'gi gi-user', 'y', 'users/account', 3);
+(11, 'kelola data siswa', '', 'y', '#', 1),
+(12, 'kelola data guru', '', 'y', 'guru', 1),
+(13, 'kelola mata pelajaran', '', 'y', 'matakuliah', 1),
+(14, 'pembelajaran', '', 'y', '#', 1),
+(15, 'keuangan', '', 'y', '#', 1),
+(19, 'pengguna sistem', '', 'y', 'users', 1),
+(34, 'data guru', '', 'y', '#', 2),
+(35, 'data siswa', '', 'y', '#', 2),
+(36, 'Data Nilai', '', 'y', '#', 2),
+(37, 'jadwal', '', 'y', '#', 3),
+(38, 'absen siswa', '', 'y', '#', 3),
+(39, 'nilai', '', 'y', '#', 3),
+(40, 'bodata', '', 'y', '#', 3),
+(41, 'data siswa', '', 'y', '#', 4),
+(42, 'kelola nilai', '', '', '', 4),
+(50, 'lihat laporan', '', 'y', '#', 2),
+(52, 'data siswa', '', 'y', '#', 4),
+(53, 'data nilai', '', 'y', '#', 4),
+(54, 'data guru', '', 'y', '#', 5),
+(55, 'Kelola Gaji', '', 'y', '#', 5),
+(56, 'laporan gaji', '', 'y', '', 5);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `makul_kelompok`
+-- Table structure for table `makul_kelompok`
 --
 
 CREATE TABLE IF NOT EXISTS `makul_kelompok` (
-  `kelompok_id` int(11) NOT NULL AUTO_INCREMENT,
+  `kelompok_id` int(11) NOT NULL,
   `kode_kelompok` varchar(5) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  PRIMARY KEY (`kelompok_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `nama` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `makul_kelompok`
+-- Dumping data for table `makul_kelompok`
 --
 
 INSERT INTO `makul_kelompok` (`kelompok_id`, `kode_kelompok`, `nama`) VALUES
-(1, 'mpk', 'mata kuliah pengembangan keperibadian'),
-(2, 'mkk', 'mata kuliah pengembangan keilmuan dan keterampilan'),
-(3, 'mkb', 'mata kuliah keahlian berkarya'),
-(4, 'mpb', 'mata kuliah perilaku berkarya'),
-(5, 'mbb', 'matakuliah berkehidupan bermasyarakat');
+(1, 'teori', 'teori'),
+(2, 'prakt', 'Praktikum');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `makul_matakuliah`
+-- Table structure for table `makul_matakuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `makul_matakuliah` (
-  `makul_id` int(11) NOT NULL AUTO_INCREMENT,
+  `makul_id` int(11) NOT NULL,
   `kode_makul` varchar(11) NOT NULL,
   `nama_makul` varchar(60) NOT NULL,
   `sks` int(11) NOT NULL,
@@ -1788,40 +1719,14 @@ CREATE TABLE IF NOT EXISTS `makul_matakuliah` (
   `konsentrasi_id` int(3) NOT NULL,
   `kelompok_id` int(1) NOT NULL,
   `aktif` enum('y','n') NOT NULL,
-  `jam` int(11) NOT NULL,
-  PRIMARY KEY (`makul_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+  `jam` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `makul_matakuliah`
+-- Dumping data for table `makul_matakuliah`
 --
 
 INSERT INTO `makul_matakuliah` (`makul_id`, `kode_makul`, `nama_makul`, `sks`, `semester`, `konsentrasi_id`, `kelompok_id`, `aktif`, `jam`) VALUES
-(1, 'DTIKB01', 'STRUKTUR DATA', 4, 1, 3, 2, 'n', 4),
-(2, 'DTIKB011', 'KONSEP PEMROGRAMAN', 4, 1, 3, 2, 'y', 4),
-(3, 'DTIKB012', 'PRAKTEK KONSEP PEMROGRAMAN', 4, 1, 3, 2, 'y', 4),
-(4, 'DTIKB02', 'SISTEM OPERASI 1', 4, 1, 3, 2, 'y', 4),
-(5, 'DTIKB03', 'SISTEM OPERASI 2', 4, 1, 3, 2, 'y', 4),
-(6, 'DTIKB04', 'PEMROGRAMAN DELPHI', 4, 1, 3, 2, 'y', 4),
-(7, 'DTIKB05', 'JARINGAN KOMPUTER 1', 4, 2, 3, 2, 'y', 4),
-(8, 'DTIKB06', 'APLIKASI DAN TEKNOLOGI WEB', 4, 2, 3, 2, 'y', 4),
-(9, 'DTIKB07', 'KOMUNIKASI DATA', 4, 2, 3, 2, 'y', 4),
-(10, 'DTIKB08', 'DESAIN BERBASIS KOMPUTER', 4, 2, 3, 2, 'y', 4),
-(11, 'DTIKB09', 'MIKROPROSESOR', 4, 2, 3, 2, 'y', 4),
-(12, 'DTIKB10', 'INTERFACING PERIPHERAL KOMPUTER', 4, 2, 3, 2, 'y', 4),
-(13, 'DTIKB11', 'ARSITEKTUR KOMPUTER 1', 4, 3, 3, 2, 'y', 4),
-(14, 'DTIKB12', 'ARSITEKTUR KOMPUTER 2', 4, 3, 3, 2, 'y', 4),
-(15, 'DTIKB13', 'PERALATAN ELEKTRONIKA', 4, 3, 3, 2, 'y', 4),
-(16, 'DTIKB14', 'TROUBLESHOOTING', 4, 3, 3, 2, 'y', 4),
-(17, 'DTIKB15', 'PEMROGRAMAN BASIS DATA', 4, 3, 3, 2, 'y', 4),
-(18, 'DTIKB16', 'SISTEM INFORMASI MANAJEMEN', 4, 3, 3, 2, 'y', 4),
-(19, 'DTIKB17', 'PERANCANGAN SISTEM INFORMASI', 4, 4, 3, 2, 'y', 4),
-(20, 'DTIKB18', 'PENGOLAHAN CITRA DIGITAL', 4, 4, 3, 2, 'y', 4),
-(21, 'DTIKB19', 'RANGKAIAN DIGITAL', 4, 4, 3, 2, 'y', 4),
-(22, 'DTIKB20', 'PEMROGRAMAN BAHASA C++', 4, 4, 3, 2, 'y', 4),
-(23, 'DTIKB21', 'PEMROGRAMAN VISUAL', 4, 4, 3, 2, 'y', 4),
-(24, 'DTIKB22', 'KOMPUTER GRAFIS', 4, 4, 3, 2, 'y', 4),
-(25, 'DTIKB23', 'WIRELESS & MOBILE COMM', 4, 5, 3, 2, 'y', 4),
 (26, 'DTIKB24', 'REKAYASA PERANGKAT LUNAK', 4, 5, 3, 2, 'y', 4),
 (27, 'DTIKB25', 'SISTEM KEAMANAN JARINGAN', 4, 5, 3, 2, 'y', 4),
 (28, 'DTIKB26', 'PEMROGRAMAN BERBASIS OBJEK', 4, 5, 3, 2, 'y', 4),
@@ -1845,12 +1750,13 @@ INSERT INTO `makul_matakuliah` (`makul_id`, `kode_makul`, `nama_makul`, `sks`, `
 (46, 'DTIKK01', 'MATEMATIKA 1', 4, 8, 3, 2, 'y', 4),
 (47, 'DTIKK02', 'MATEMATIKA 2', 4, 8, 3, 2, 'y', 4),
 (48, 'DTIKK03', 'STATISTIK & PROBABILITAS', 4, 8, 3, 2, 'y', 4),
-(49, 'DTIKK04', 'PERANGKAT LUNAK APLIKASI', 4, 9, 3, 2, 'y', 4);
+(49, 'DTIKK04', 'PERANGKAT LUNAK APLIKASI', 4, 9, 3, 2, 'y', 4),
+(50, '11', '111', 1, 1, 1, 1, 'y', 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `outbox`
+-- Table structure for table `outbox`
 --
 
 CREATE TABLE IF NOT EXISTS `outbox` (
@@ -1863,20 +1769,17 @@ CREATE TABLE IF NOT EXISTS `outbox` (
   `UDH` text,
   `Class` int(11) DEFAULT '-1',
   `TextDecoded` text NOT NULL,
-  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ID` int(10) unsigned NOT NULL,
   `MultiPart` enum('false','true') DEFAULT 'false',
   `RelativeValidity` int(11) DEFAULT '-1',
   `SenderID` varchar(255) DEFAULT NULL,
   `SendingTimeOut` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   `DeliveryReport` enum('default','yes','no') DEFAULT 'default',
-  `CreatorID` text NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `outbox_date` (`SendingDateTime`,`SendingTimeOut`),
-  KEY `outbox_sender` (`SenderID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+  `CreatorID` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `outbox`
+-- Dumping data for table `outbox`
 --
 
 INSERT INTO `outbox` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `Text`, `DestinationNumber`, `Coding`, `UDH`, `Class`, `TextDecoded`, `ID`, `MultiPart`, `RelativeValidity`, `SenderID`, `SendingTimeOut`, `DeliveryReport`, `CreatorID`) VALUES
@@ -1894,7 +1797,7 @@ INSERT INTO `outbox` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `Text`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `outbox_multipart`
+-- Table structure for table `outbox_multipart`
 --
 
 CREATE TABLE IF NOT EXISTS `outbox_multipart` (
@@ -1904,40 +1807,37 @@ CREATE TABLE IF NOT EXISTS `outbox_multipart` (
   `Class` int(11) DEFAULT '-1',
   `TextDecoded` text,
   `ID` int(10) unsigned NOT NULL DEFAULT '0',
-  `SequencePosition` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`ID`,`SequencePosition`)
+  `SequencePosition` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pbk`
+-- Table structure for table `pbk`
 --
 
 CREATE TABLE IF NOT EXISTS `pbk` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '-1',
   `Name` text NOT NULL,
-  `Number` text NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Number` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pbk_groups`
+-- Table structure for table `pbk_groups`
 --
 
 CREATE TABLE IF NOT EXISTS `pbk_groups` (
   `Name` text NOT NULL,
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `phones`
+-- Table structure for table `phones`
 --
 
 CREATE TABLE IF NOT EXISTS `phones` (
@@ -1952,12 +1852,11 @@ CREATE TABLE IF NOT EXISTS `phones` (
   `Battery` int(11) NOT NULL DEFAULT '0',
   `Signal` int(11) NOT NULL DEFAULT '0',
   `Sent` int(11) NOT NULL DEFAULT '0',
-  `Received` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`IMEI`)
+  `Received` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `phones`
+-- Dumping data for table `phones`
 --
 
 INSERT INTO `phones` (`ID`, `UpdatedInDB`, `InsertIntoDB`, `TimeOut`, `Send`, `Receive`, `IMEI`, `Client`, `Battery`, `Signal`, `Sent`, `Received`) VALUES
@@ -1966,7 +1865,7 @@ INSERT INTO `phones` (`ID`, `UpdatedInDB`, `InsertIntoDB`, `TimeOut`, `Send`, `R
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sentitems`
+-- Table structure for table `sentitems`
 --
 
 CREATE TABLE IF NOT EXISTS `sentitems` (
@@ -1988,16 +1887,11 @@ CREATE TABLE IF NOT EXISTS `sentitems` (
   `StatusError` int(11) NOT NULL DEFAULT '-1',
   `TPMR` int(11) NOT NULL DEFAULT '-1',
   `RelativeValidity` int(11) NOT NULL DEFAULT '-1',
-  `CreatorID` text NOT NULL,
-  PRIMARY KEY (`ID`,`SequencePosition`),
-  KEY `sentitems_date` (`DeliveryDateTime`),
-  KEY `sentitems_tpmr` (`TPMR`),
-  KEY `sentitems_dest` (`DestinationNumber`),
-  KEY `sentitems_sender` (`SenderID`)
+  `CreatorID` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `sentitems`
+-- Dumping data for table `sentitems`
 --
 
 INSERT INTO `sentitems` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `DeliveryDateTime`, `Text`, `DestinationNumber`, `Coding`, `UDH`, `SMSCNumber`, `Class`, `TextDecoded`, `ID`, `SenderID`, `SequencePosition`, `Status`, `StatusError`, `TPMR`, `RelativeValidity`, `CreatorID`) VALUES
@@ -2025,7 +1919,7 @@ INSERT INTO `sentitems` (`UpdatedInDB`, `InsertIntoDB`, `SendingDateTime`, `Deli
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `setting`
+-- Table structure for table `setting`
 --
 
 CREATE TABLE IF NOT EXISTS `setting` (
@@ -2036,28 +1930,28 @@ CREATE TABLE IF NOT EXISTS `setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `setting`
+-- Dumping data for table `setting`
 --
 
 INSERT INTO `setting` (`id`, `nama_kampus`, `alamat_kampus`, `telpon`) VALUES
-(1, 'politeknik tedc bandung1', 'cimahi', '0218765431');
+(1, 'politeknik tedc bandung1', 'cimahi', '0218765431'),
+(2, 'Telkom University', 'Jl. Telekomunikasi', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student_absen`
+-- Table structure for table `student_absen`
 --
 
 CREATE TABLE IF NOT EXISTS `student_absen` (
-  `absen_id` int(11) NOT NULL AUTO_INCREMENT,
+  `absen_id` int(11) NOT NULL,
   `jadwal_id` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `keterangan` text NOT NULL,
-  PRIMARY KEY (`absen_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `student_absen`
+-- Dumping data for table `student_absen`
 --
 
 INSERT INTO `student_absen` (`absen_id`, `jadwal_id`, `tanggal`, `keterangan`) VALUES
@@ -2071,20 +1965,19 @@ INSERT INTO `student_absen` (`absen_id`, `jadwal_id`, `tanggal`, `keterangan`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student_absen_detail`
+-- Table structure for table `student_absen_detail`
 --
 
 CREATE TABLE IF NOT EXISTS `student_absen_detail` (
-  `detail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `detail_id` int(11) NOT NULL,
   `absen_id` int(11) NOT NULL,
   `nim` varchar(10) NOT NULL,
   `kehadiran` varchar(1) NOT NULL,
-  `keterangan` text NOT NULL,
-  PRIMARY KEY (`detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `student_absen_detail`
+-- Dumping data for table `student_absen_detail`
 --
 
 INSERT INTO `student_absen_detail` (`detail_id`, `absen_id`, `nim`, `kehadiran`, `keterangan`) VALUES
@@ -2115,32 +2008,31 @@ INSERT INTO `student_absen_detail` (`detail_id`, `absen_id`, `nim`, `kehadiran`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student_angkatan`
+-- Table structure for table `student_angkatan`
 --
 
 CREATE TABLE IF NOT EXISTS `student_angkatan` (
-  `angkatan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `angkatan_id` int(11) NOT NULL,
   `keterangan` varchar(15) NOT NULL,
-  `aktif` varchar(1) NOT NULL COMMENT 'y = aktif dan n = tidak',
-  PRIMARY KEY (`angkatan_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `aktif` varchar(1) NOT NULL COMMENT 'y = aktif dan n = tidak'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `student_angkatan`
+-- Dumping data for table `student_angkatan`
 --
 
 INSERT INTO `student_angkatan` (`angkatan_id`, `keterangan`, `aktif`) VALUES
-(1, '2013-2014', 'n'),
-(2, '2014-2015', 'y');
+(2, '2014-2015', 'y'),
+(3, '2016 - 2017', 'n');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student_mahasiswa`
+-- Table structure for table `student_siswa`
 --
 
-CREATE TABLE IF NOT EXISTS `student_mahasiswa` (
-  `mahasiswa_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `student_siswa` (
+  `siswa_id` int(11) NOT NULL,
   `nim` varchar(13) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `konsentrasi_id` int(2) NOT NULL,
@@ -2178,69 +2070,429 @@ CREATE TABLE IF NOT EXISTS `student_mahasiswa` (
   `instansi_alamat` text NOT NULL,
   `instansi_mulai` int(4) NOT NULL,
   `instansi_sampai` int(4) NOT NULL,
-  `semester_aktif` int(11) NOT NULL,
-  PRIMARY KEY (`mahasiswa_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `semester_aktif` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `student_mahasiswa`
+-- Dumping data for table `student_siswa`
 --
 
-INSERT INTO `student_mahasiswa` (`mahasiswa_id`, `nim`, `nama`, `konsentrasi_id`, `angkatan_id`, `alamat`, `semester`, `gender`, `agama_id`, `tempat_lahir`, `tanggal_lahir`, `nama_ibu`, `nama_ayah`, `no_hp_ortu`, `pekerjaan_id_ibu`, `pekerjaan_id_ayah`, `alamat_ayah`, `alamat_ibu`, `penghasilan_ayah`, `penghasilan_ibu`, `sekolah_nama`, `sekolah_telpon`, `sekolah_alamat`, `sekolah_jurusan`, `sekolah_tahun_lulus`, `kampus_nama`, `kampus_telpon`, `kampus_alamat`, `kampus_jurusan`, `kampus_tahun_lulus`, `institusi_nama`, `institusi_telpon`, `institusi_alamat`, `instansi_nama`, `instansi_telpon`, `instansi_alamat`, `instansi_mulai`, `instansi_sampai`, `semester_aktif`) VALUES
-(1, 'ti102134', 'nuris akbar', 3, 1, 'jl.pesantren km 2', 0, '1', 1, 'langsa', '1992-08-24', 'nurhayati', 'ishak husein', '082121473036', 1, 9, 'telaga meku', 'telaga meku', 2, 0, 'smkn 2 langsa', '02121456', 'jl pb.seleumak', 'rpl', 2010, 'smkn 2 langsa', '02121456', 'jl pb.seleumak', 'rpl', 2010, 'reka pancatama', '02134567', 'jl soekarno hataa', 'sample text', '02145675', 'saple', 2010, 2014, 5),
-(5, 'KA131002', 'Etika Cahya Pribadi', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 4),
-(6, 'KA131003', 'Indira Nuaisyah', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 6),
-(7, 'KA131004', 'Irmawati Sipahutar', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 3),
-(8, 'KA131005', 'Lutfhyyah Nadia Zulfikrie', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 3),
-(9, 'KA131006', 'Nabila Ladysthya Taufiq', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 4),
-(10, 'KA131007', 'Tiara Nur Cahya', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 2),
-(13, 'KA131010', 'Andhyka Adiguna Sujana', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 2),
-(14, 'KA131011', 'Nunu Suherna Nusuri', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 2),
-(15, 'KA131012', 'Nurul Rahmatun Putri Rustama', 3, 1, '', 0, 'l', 0, '', '0000-00-00', '', '', '', 0, 0, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '', '', '', '', '', '', 0, 0, 2);
+INSERT INTO `student_siswa` (`siswa_id`, `nim`, `nama`, `konsentrasi_id`, `angkatan_id`, `alamat`, `semester`, `gender`, `agama_id`, `tempat_lahir`, `tanggal_lahir`, `nama_ibu`, `nama_ayah`, `no_hp_ortu`, `pekerjaan_id_ibu`, `pekerjaan_id_ayah`, `alamat_ayah`, `alamat_ibu`, `penghasilan_ayah`, `penghasilan_ibu`, `sekolah_nama`, `sekolah_telpon`, `sekolah_alamat`, `sekolah_jurusan`, `sekolah_tahun_lulus`, `kampus_nama`, `kampus_telpon`, `kampus_alamat`, `kampus_jurusan`, `kampus_tahun_lulus`, `institusi_nama`, `institusi_telpon`, `institusi_alamat`, `instansi_nama`, `instansi_telpon`, `instansi_alamat`, `instansi_mulai`, `instansi_sampai`, `semester_aktif`) VALUES
+(20, 'a', 'a', 1, 2, 'aaa', 0, '1', 1, 'aaaa', '2016-04-19', '', '', '', 1, 1, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '0', '', '', '', '', '0', 0, 0, 0),
+(21, 'a', 'a', 1, 2, 'a', 0, '1', 1, 'a', '2016-04-18', '', '', '', 1, 1, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '0', '', '', '', '', '0', 0, 0, 0),
+(22, 'a', 'a', 1, 2, '', 0, '1', 1, '', '0000-00-00', '', '', '', 1, 1, '', '', 0, 0, '', '', '', '', 0, '', '', '', '', 0, '0', '', '', '', '', '0', 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `submenu`
+-- Table structure for table `submenu`
 --
 
 CREATE TABLE IF NOT EXISTS `submenu` (
-  `id_submenu` int(11) NOT NULL AUTO_INCREMENT,
+  `id_submenu` int(11) NOT NULL,
   `id_mainmenu` int(11) NOT NULL,
   `nama_submenu` varchar(50) NOT NULL,
   `link` varchar(50) NOT NULL,
   `aktif` enum('y','t') NOT NULL,
   `icon` varchar(30) NOT NULL,
-  `level` int(11) NOT NULL,
-  PRIMARY KEY (`id_submenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
+  `level` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `submenu`
+-- Dumping data for table `submenu`
 --
 
 INSERT INTO `submenu` (`id_submenu`, `id_mainmenu`, `nama_submenu`, `link`, `aktif`, `icon`, `level`) VALUES
-(70, 28, 'tahun akademik', 'tahunakademik', 'y', 'gi gi-calendar', 1),
-(71, 26, 'gedung', 'gedung', 'y', 'gi gi-cargo', 1),
-(72, 26, 'ruangan', 'ruangan', 'y', 'gi gi-bank', 1),
-(73, 28, 'matakuliah', 'matakuliah', 'y', 'gi gi-book_open', 1),
-(74, 26, 'prodi', 'prodi', 'y', 'gi gi-table', 1),
-(75, 26, 'konsentrasi', 'konsentrasi', 'y', 'fa fa-credit-card', 1),
-(76, 26, 'dosen', 'dosen', 'y', 'gi gi-parents', 1),
-(77, 28, 'jadwal kuliah', 'jadwalkuliah', 'y', 'fa fa-calendar', 1),
-(78, 26, 'kelompok matakuliah', 'kelompokmatakuliah', 'y', 'gi gi-address_book', 1),
-(79, 29, 'form pembayaran', 'keuangan/pembayaran', 'y', 'gi gi-coins', 1),
-(80, 29, 'jenis pembayaran', 'jenisbayar', 'y', 'fa fa-puzzle-piece', 1),
-(81, 29, 'biaya kuliah', 'setupbiayakuliah', 'y', 'fa fa-money', 1),
-(82, 29, 'laporan keuangan', 'keuangan/laporan', 'y', 'gi gi-notes_2', 1),
-(83, 28, 'registrasi', 'registrasi', 'y', 'fa fa-keyboard-o', 1),
-(84, 28, 'kartu rencana studi', 'krs/lihat', 'y', 'gi gi-cart_in', 1),
-(85, 35, 'kartu rencana studi', 'krs/lihat', 'y', 'gi gi-notes_2', 0),
-(86, 35, 'kartu rencana studi', 'khs', 'y', 'hi hi-list-alt', 0),
-(87, 26, 'grade nilai', 'grade', 'y', 'gi gi-credit_card', 0),
-(88, 28, 'kartu hasil studi', 'khs', 'y', 'gi gi-notes', 0),
-(89, 26, 'tahun angkatan', 'tahunangkatan', 'y', 'gi gi-calendar', 0);
+(111, 11, 'tambah siswa baru', 'siswa/post', 'y', '', 1),
+(112, 11, 'tampilkan data siswa', 'siswa', 'y', '', 1),
+(131, 13, 'Tambah Mata Pelajaran', 'matakuliah/post', 'y', '', 1),
+(132, 13, 'Kelola Mata Pelajaran', 'matakuliah', 'y', '', 1),
+(141, 14, 'kelola tingkat', 'tingkat', 'y', '', 1),
+(142, 14, 'kelola penjurusan', 'penjurusan', 'y', '', 1),
+(143, 14, 'kelola tahun angkatan', 'tahunangkatan', 'y', '', 1),
+(144, 14, 'kelola tipe pembelajaran', 'kelompokmatakuliah', 'y', '', 1),
+(145, 14, 'kelola ruang kelas', 'ruangan', 'y', '', 1),
+(146, 14, 'kelola tingkat nilai', 'grade', 'y', '', 1),
+(147, 14, 'kelola jadwal belajar', 'jadwalkuliah', 'y', '', 1),
+(148, 14, 'kelola laporan belajar', 'khs', 'y', '', 1),
+(151, 15, 'pembayaran', 'pembayaran', 'y', '', 1),
+(152, 15, 'jenis pembayaran', 'jenisbayar', 'y', '', 1),
+(153, 15, 'laporan pembayaran', 'laporan', 'y', '', 1);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `akademik_jadwal_kuliah`
+--
+ALTER TABLE `akademik_jadwal_kuliah`
+  ADD PRIMARY KEY (`jadwal_id`);
+
+--
+-- Indexes for table `akademik_khs`
+--
+ALTER TABLE `akademik_khs`
+  ADD PRIMARY KEY (`khs_id`);
+
+--
+-- Indexes for table `akademik_konsentrasi`
+--
+ALTER TABLE `akademik_konsentrasi`
+  ADD PRIMARY KEY (`konsentrasi_id`);
+
+--
+-- Indexes for table `akademik_krs`
+--
+ALTER TABLE `akademik_krs`
+  ADD PRIMARY KEY (`krs_id`);
+
+--
+-- Indexes for table `akademik_prodi`
+--
+ALTER TABLE `akademik_prodi`
+  ADD PRIMARY KEY (`prodi_id`);
+
+--
+-- Indexes for table `akademik_registrasi`
+--
+ALTER TABLE `akademik_registrasi`
+  ADD PRIMARY KEY (`registrasi_id`);
+
+--
+-- Indexes for table `akademik_tahun_akademik`
+--
+ALTER TABLE `akademik_tahun_akademik`
+  ADD PRIMARY KEY (`tahun_akademik_id`);
+
+--
+-- Indexes for table `akademik_waktu_kuliah`
+--
+ALTER TABLE `akademik_waktu_kuliah`
+  ADD PRIMARY KEY (`waktu_id`);
+
+--
+-- Indexes for table `app_agama`
+--
+ALTER TABLE `app_agama`
+  ADD PRIMARY KEY (`agama_id`);
+
+--
+-- Indexes for table `app_dosen`
+--
+ALTER TABLE `app_dosen`
+  ADD PRIMARY KEY (`dosen_id`);
+
+--
+-- Indexes for table `app_gedung`
+--
+ALTER TABLE `app_gedung`
+  ADD PRIMARY KEY (`gedung_id`);
+
+--
+-- Indexes for table `app_hari`
+--
+ALTER TABLE `app_hari`
+  ADD PRIMARY KEY (`hari_id`);
+
+--
+-- Indexes for table `app_nilai_grade`
+--
+ALTER TABLE `app_nilai_grade`
+  ADD PRIMARY KEY (`nilai_id`);
+
+--
+-- Indexes for table `app_pekerjaan`
+--
+ALTER TABLE `app_pekerjaan`
+  ADD PRIMARY KEY (`pekerjaan_id`);
+
+--
+-- Indexes for table `app_ruangan`
+--
+ALTER TABLE `app_ruangan`
+  ADD PRIMARY KEY (`ruangan_id`);
+
+--
+-- Indexes for table `app_users`
+--
+ALTER TABLE `app_users`
+  ADD PRIMARY KEY (`id_users`);
+
+--
+-- Indexes for table `inbox`
+--
+ALTER TABLE `inbox`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `keuangan_biaya_kuliah`
+--
+ALTER TABLE `keuangan_biaya_kuliah`
+  ADD PRIMARY KEY (`biaya_kuliah_id`);
+
+--
+-- Indexes for table `keuangan_jenis_bayar`
+--
+ALTER TABLE `keuangan_jenis_bayar`
+  ADD PRIMARY KEY (`jenis_bayar_id`);
+
+--
+-- Indexes for table `keuangan_pembayaran`
+--
+ALTER TABLE `keuangan_pembayaran`
+  ADD PRIMARY KEY (`pembayaran_id`);
+
+--
+-- Indexes for table `keuangan_pembayaran_detail`
+--
+ALTER TABLE `keuangan_pembayaran_detail`
+  ADD PRIMARY KEY (`pembayara_detail_id`);
+
+--
+-- Indexes for table `mainmenu`
+--
+ALTER TABLE `mainmenu`
+  ADD PRIMARY KEY (`id_mainmenu`);
+
+--
+-- Indexes for table `makul_kelompok`
+--
+ALTER TABLE `makul_kelompok`
+  ADD PRIMARY KEY (`kelompok_id`);
+
+--
+-- Indexes for table `makul_matakuliah`
+--
+ALTER TABLE `makul_matakuliah`
+  ADD PRIMARY KEY (`makul_id`);
+
+--
+-- Indexes for table `outbox`
+--
+ALTER TABLE `outbox`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `outbox_date` (`SendingDateTime`,`SendingTimeOut`),
+  ADD KEY `outbox_sender` (`SenderID`);
+
+--
+-- Indexes for table `outbox_multipart`
+--
+ALTER TABLE `outbox_multipart`
+  ADD PRIMARY KEY (`ID`,`SequencePosition`);
+
+--
+-- Indexes for table `pbk`
+--
+ALTER TABLE `pbk`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `pbk_groups`
+--
+ALTER TABLE `pbk_groups`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `phones`
+--
+ALTER TABLE `phones`
+  ADD PRIMARY KEY (`IMEI`);
+
+--
+-- Indexes for table `sentitems`
+--
+ALTER TABLE `sentitems`
+  ADD PRIMARY KEY (`ID`,`SequencePosition`),
+  ADD KEY `sentitems_date` (`DeliveryDateTime`),
+  ADD KEY `sentitems_tpmr` (`TPMR`),
+  ADD KEY `sentitems_dest` (`DestinationNumber`),
+  ADD KEY `sentitems_sender` (`SenderID`);
+
+--
+-- Indexes for table `student_absen`
+--
+ALTER TABLE `student_absen`
+  ADD PRIMARY KEY (`absen_id`);
+
+--
+-- Indexes for table `student_absen_detail`
+--
+ALTER TABLE `student_absen_detail`
+  ADD PRIMARY KEY (`detail_id`);
+
+--
+-- Indexes for table `student_angkatan`
+--
+ALTER TABLE `student_angkatan`
+  ADD PRIMARY KEY (`angkatan_id`);
+
+--
+-- Indexes for table `student_siswa`
+--
+ALTER TABLE `student_siswa`
+  ADD PRIMARY KEY (`siswa_id`);
+
+--
+-- Indexes for table `submenu`
+--
+ALTER TABLE `submenu`
+  ADD PRIMARY KEY (`id_submenu`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `akademik_jadwal_kuliah`
+--
+ALTER TABLE `akademik_jadwal_kuliah`
+  MODIFY `jadwal_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
+--
+-- AUTO_INCREMENT for table `akademik_khs`
+--
+ALTER TABLE `akademik_khs`
+  MODIFY `khs_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=162;
+--
+-- AUTO_INCREMENT for table `akademik_konsentrasi`
+--
+ALTER TABLE `akademik_konsentrasi`
+  MODIFY `konsentrasi_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `akademik_krs`
+--
+ALTER TABLE `akademik_krs`
+  MODIFY `krs_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=162;
+--
+-- AUTO_INCREMENT for table `akademik_prodi`
+--
+ALTER TABLE `akademik_prodi`
+  MODIFY `prodi_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `akademik_registrasi`
+--
+ALTER TABLE `akademik_registrasi`
+  MODIFY `registrasi_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `akademik_tahun_akademik`
+--
+ALTER TABLE `akademik_tahun_akademik`
+  MODIFY `tahun_akademik_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `akademik_waktu_kuliah`
+--
+ALTER TABLE `akademik_waktu_kuliah`
+  MODIFY `waktu_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `app_dosen`
+--
+ALTER TABLE `app_dosen`
+  MODIFY `dosen_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `app_gedung`
+--
+ALTER TABLE `app_gedung`
+  MODIFY `gedung_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `app_hari`
+--
+ALTER TABLE `app_hari`
+  MODIFY `hari_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `app_nilai_grade`
+--
+ALTER TABLE `app_nilai_grade`
+  MODIFY `nilai_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `app_ruangan`
+--
+ALTER TABLE `app_ruangan`
+  MODIFY `ruangan_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+--
+-- AUTO_INCREMENT for table `app_users`
+--
+ALTER TABLE `app_users`
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `inbox`
+--
+ALTER TABLE `inbox`
+  MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `keuangan_biaya_kuliah`
+--
+ALTER TABLE `keuangan_biaya_kuliah`
+  MODIFY `biaya_kuliah_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=943;
+--
+-- AUTO_INCREMENT for table `keuangan_jenis_bayar`
+--
+ALTER TABLE `keuangan_jenis_bayar`
+  MODIFY `jenis_bayar_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `keuangan_pembayaran`
+--
+ALTER TABLE `keuangan_pembayaran`
+  MODIFY `pembayaran_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `keuangan_pembayaran_detail`
+--
+ALTER TABLE `keuangan_pembayaran_detail`
+  MODIFY `pembayara_detail_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `mainmenu`
+--
+ALTER TABLE `mainmenu`
+  MODIFY `id_mainmenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT for table `makul_kelompok`
+--
+ALTER TABLE `makul_kelompok`
+  MODIFY `kelompok_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `makul_matakuliah`
+--
+ALTER TABLE `makul_matakuliah`
+  MODIFY `makul_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
+--
+-- AUTO_INCREMENT for table `outbox`
+--
+ALTER TABLE `outbox`
+  MODIFY `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
+--
+-- AUTO_INCREMENT for table `pbk`
+--
+ALTER TABLE `pbk`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pbk_groups`
+--
+ALTER TABLE `pbk_groups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `student_absen`
+--
+ALTER TABLE `student_absen`
+  MODIFY `absen_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `student_absen_detail`
+--
+ALTER TABLE `student_absen_detail`
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `student_angkatan`
+--
+ALTER TABLE `student_angkatan`
+  MODIFY `angkatan_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `student_siswa`
+--
+ALTER TABLE `student_siswa`
+  MODIFY `siswa_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `submenu`
+--
+ALTER TABLE `submenu`
+  MODIFY `id_submenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=154;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
